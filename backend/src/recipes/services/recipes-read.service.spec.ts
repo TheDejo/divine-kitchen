@@ -18,8 +18,14 @@ describe('RecipesReadService', () => {
 
     describe('findAll', () => {
         it('should return an array of recipes', () => {
-            expect(service.findAll()).toBeDefined();
-            expect(Array.isArray(service.findAll())).toBe(true);
+            const recipes = service.findAll();
+            expect(recipes).toBeDefined();
+            expect(Array.isArray(recipes)).toBe(true);
+        });
+
+        it('should paginate results', () => {
+            const recipes = service.findAll(1, 2);
+            expect(recipes.length).toBeLessThanOrEqual(2);
         });
     });
 
