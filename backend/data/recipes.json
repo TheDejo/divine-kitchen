@@ -1,0 +1,62 @@
+[
+  {
+    "name": "meringue",
+    "difficulty": "medium",
+    "rating": 3,
+    "cookTimeMinutes": 60
+  },
+  {
+    "name": "pasta carbonara",
+    "difficulty": "easy",
+    "rating": 4,
+    "cookTimeMinutes": 25
+  },
+  {
+    "name": "beef stew",
+    "difficulty": "hard",
+    "rating": 5,
+    "cookTimeMinutes": 120
+  },
+  {
+    "name": "pancakes",
+    "difficulty": "easy",
+    "rating": 5,
+    "cookTimeMinutes": 15
+  },
+  {
+    "name": "chocolate cake",
+    "difficulty": "medium",
+    "rating": 4,
+    "cookTimeMinutes": 40
+  },
+  {
+    "name": "sushi rolls",
+    "difficulty": "hard",
+    "rating": 3,
+    "cookTimeMinutes": 60
+  },
+  {
+    "name": "apple pie",
+    "difficulty": "medium",
+    "rating": 4,
+    "cookTimeMinutes": 90
+  },
+  {
+    "name": "grilled cheese sandwich with extra mayonnaise and various extra condiments including but not limited to mustard, ketchup, and hot sauce",
+    "difficulty": "easy",
+    "rating": 5,
+    "cookTimeMinutes": 10
+  },
+  {
+    "name": "caesar salad",
+    "difficulty": "easy",
+    "rating": 3,
+    "cookTimeMinutes": 10
+  },
+  {
+    "name": "chicken curry",
+    "difficulty": "hard",
+    "rating": 4,
+    "cookTimeMinutes": 75
+  }
+]
