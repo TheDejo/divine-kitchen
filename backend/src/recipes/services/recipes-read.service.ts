@@ -12,12 +12,7 @@ export class RecipesReadService {
 
     private loadRecipes(): Recipe[] {
         const fileContent = fs.readFileSync(this.dataPath, ENCODING);
-        const rawRecipes = JSON.parse(fileContent);
-        return rawRecipes.map((recipe: Recipe, index: number) => ({
-            id: (index + ID_OFFSET).toString(),
-            ...recipe,
-            createdAt: new Date(),
-        }));
+        return JSON.parse(fileContent);
     }
 
     findAll(page: number = DEFAULT_PAGE, limit: number = DEFAULT_LIMIT): Recipe[] {

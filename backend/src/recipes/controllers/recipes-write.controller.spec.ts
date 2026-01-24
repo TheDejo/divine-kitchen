@@ -31,7 +31,15 @@ describe('RecipesWriteController', () => {
 
     describe('create', () => {
         it('should create a new recipe', async () => {
-            const dto = { name: 'Test', difficulty: 'easy' as const, rating: 5, cookTimeMinutes: 30 };
+            const dto = {
+                name: 'Test',
+                difficulty: 'easy' as const,
+                rating: 5,
+                cookTimeMinutes: 30,
+                description: 'Description',
+                steps: [],
+                cookingCompleted: false
+            };
             expect(await controller.create(dto)).toEqual({});
             expect(mockRecipesService.create).toHaveBeenCalledWith(dto);
         });
