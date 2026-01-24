@@ -11,6 +11,13 @@ const ENCODING = 'utf8' as const;
 const JSON_SPACING = 2;
 const LAST_ITEM_INDEX_OFFSET = 1;
 
+export const RECIPE_ROUTES = {
+    BASE: 'recipes',
+    ID_PARAM: 'id',
+    BY_ID: ':id',
+};
+
+
 export const constants = {
     DATA,
     DEFAULT_PAGE,
@@ -18,5 +25,6 @@ export const constants = {
     ID_OFFSET,
     ENCODING,
     JSON_SPACING,
-    LAST_ITEM_INDEX_OFFSET
+    LAST_ITEM_INDEX_OFFSET,
+    RECIPE_ROUTES
 }
