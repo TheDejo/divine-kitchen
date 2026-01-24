@@ -8,9 +8,9 @@ jest.mock('fs');
 describe('RecipesReadService', () => {
     let service: RecipesReadService;
     const mockRecipes = [
-        { id: '1', name: 'r1', difficulty: 'easy', rating: 5, cookTimeMinutes: 10 },
-        { id: '2', name: 'r2', difficulty: 'medium', rating: 4, cookTimeMinutes: 20 },
-        { id: '3', name: 'r3', difficulty: 'hard', rating: 3, cookTimeMinutes: 30 }
+        { id: '1', name: 'recipe1', difficulty: 'easy', rating: 5, cookTimeMinutes: 10 },
+        { id: '2', name: 'recipe2', difficulty: 'medium', rating: 4, cookTimeMinutes: 20 },
+        { id: '3', name: 'recipe3', difficulty: 'hard', rating: 3, cookTimeMinutes: 30 }
     ];
 
     beforeEach(async () => {

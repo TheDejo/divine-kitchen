@@ -1,4 +1,7 @@
-
+const ENVIRONMENT = {
+    development: process.env.NODE_ENV === 'development',
+    production: process.env.NODE_ENV === 'production',
+};
 
 const DATA = {
     recipe: 'data/recipes.json'
@@ -22,8 +25,9 @@ export const constants = {
     DATA,
     DEFAULT_PAGE,
     DEFAULT_LIMIT,
-    ID_OFFSET,
+    ENVIRONMENT,
     ENCODING,
+    ID_OFFSET,
     JSON_SPACING,
     LAST_ITEM_INDEX_OFFSET,
     RECIPE_ROUTES
