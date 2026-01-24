@@ -2,24 +2,10 @@
   {
     "id": "8653ff84-d5bd-4efd-a2db-2137de435faf",
     "name": "Classic Spaghetti Bolognese",
-    "description": "A rich and savory meat sauce served over spaghetti.",
     "difficulty": "medium",
-    "rating": 5,
-    "cookTimeMinutes": 45,
-    "steps": [
-      {
-        "description": "Sauté onions and garlic.",
-        "isCompleted": false,
-        "id": "2bace588-b639-4211-af89-e900f84afab5"
-      },
-      {
-        "description": "Brown the ground beef.",
-        "isCompleted": false,
-        "id": "d84a79c5-35fc-4965-a41c-ae7813b5169d"
-      }
-    ],
-    "cookingCompleted": false,
+    "rating": 3,
+    "cookTimeMinutes": 60,
     "createdAt": "2026-01-24T11:02:21.068Z",
-    "updatedAt": "2026-01-24T20:44:48.928Z"
+    "updatedAt": "2026-01-24T20:50:07.949Z"
   }
 ]

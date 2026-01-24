@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Recipe, RecipeStep } from '../recipe.entity';
+import { Recipe } from '../recipe.entity';
 import { CreateRecipeDto } from '../dto/create-recipe.dto';
 import { UpdateRecipeDto } from '../dto/update-recipe.dto';
 import * as fs from 'fs';
@@ -22,23 +22,12 @@ export class RecipesWriteService {
         fs.writeFileSync(this.dataPath, JSON.stringify(recipes, null, JSON_SPACING), ENCODING);
     }
 
-    private generateStepIds(steps: any[]): RecipeStep[] {
-        return steps.map(step => ({
-            ...step,
-            id: crypto.randomUUID(),
-        }));
-    }
-
     create(createRecipeDto: CreateRecipeDto): Recipe {
         const recipes = this.loadRecipes();
         const now = new Date();
-        const newId = crypto.randomUUID();
-
         const newRecipe: Recipe = {
-            id: newId,
+            id: crypto.randomUUID(),
             ...createRecipeDto,
-            steps: this.generateStepIds(createRecipeDto.steps || []),
-            cookingCompleted: createRecipeDto.cookingCompleted ?? false,
             createdAt: now,
             updatedAt: now,
         };
@@ -57,18 +46,10 @@ export class RecipesWriteService {
             throw new NotFoundException(`Recipe with ID ${id} not found`);
         }
 
-        const now = new Date();
-
-        let updatedSteps = recipes[index].steps;
-        if (updateRecipeDto.steps) {
-            updatedSteps = this.generateStepIds(updateRecipeDto.steps);
-        }
-
         const updatedRecipe = {
             ...recipes[index],
             ...updateRecipeDto,
-            steps: updatedSteps,
-            updatedAt: now,
+            updatedAt: new Date(),
         };
         recipes[index] = updatedRecipe;
         this.saveRecipes(recipes);

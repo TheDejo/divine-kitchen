@@ -14,9 +14,6 @@ describe('RecipesWriteService', () => {
             difficulty: 'easy',
             rating: 5,
             cookTimeMinutes: 10,
-            description: 'desc',
-            steps: [{ id: 's1', description: 'step1', isCompleted: false }],
-            cookingCompleted: false,
             createdAt: new Date(),
             updatedAt: new Date()
         },
@@ -26,9 +23,6 @@ describe('RecipesWriteService', () => {
             difficulty: 'easy',
             rating: 5,
             cookTimeMinutes: 10,
-            description: 'desc',
-            steps: [],
-            cookingCompleted: false,
             createdAt: new Date(),
             updatedAt: new Date()
         }
@@ -50,22 +44,18 @@ describe('RecipesWriteService', () => {
 
     describe('create', () => {
         describe('Happy Path', () => {
-            it('should create a new recipe with generated IDs (recipe + steps)', () => {
+            it('should create a new recipe with generated ID', () => {
                 const dto = {
                     name: 'New',
                     difficulty: 'easy' as const,
                     rating: 5,
                     cookTimeMinutes: 30,
-                    description: 'Description',
-                    steps: [{ description: 'New Step', isCompleted: false }],
-                    cookingCompleted: false
                 };
                 const result = service.create(dto);
 
                 expect(result).toBeDefined();
                 expect(result.id).toBeDefined();
-                expect(result.steps[0].id).toBeDefined();
-                expect(result.steps[0].description).toEqual('New Step');
+                expect(result.name).toEqual('New');
                 expect(fs.writeFileSync).toHaveBeenCalled();
             });
         });
@@ -80,12 +70,6 @@ describe('RecipesWriteService', () => {
                 expect(result.rating).toEqual(1);
                 expect(result.id).toEqual('20');
                 expect(fs.writeFileSync).toHaveBeenCalled();
-            });
-
-            it('should auto-generate IDs for new steps in update', () => {
-                const dto = { steps: [{ description: 'Updated Step', isCompleted: false }] };
-                const result = service.update('20', dto);
-                expect(result.steps[0].id).toBeDefined();
             });
         });
 

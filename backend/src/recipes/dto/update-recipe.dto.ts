@@ -1,16 +1,9 @@
-
-import { IsNumber, Min, Max, IsOptional, IsString, IsIn, ValidateNested, IsArray, IsBoolean } from 'class-validator';
-import { Type } from 'class-transformer';
-import { RecipeStepDto } from './recipe-step.dto';
+import { IsNumber, Min, Max, IsOptional, IsString, IsIn } from 'class-validator';
 
 export class UpdateRecipeDto {
   @IsOptional()
   @IsString()
   name?: string;
-
-  @IsOptional()
-  @IsString()
-  description?: string;
 
   @IsOptional()
   @IsIn(['easy', 'medium', 'hard'])
@@ -26,14 +19,4 @@ export class UpdateRecipeDto {
   @IsNumber()
   @Min(1)
   cookTimeMinutes?: number;
-
-  @IsOptional()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => RecipeStepDto)
-  steps?: RecipeStepDto[];
-
-  @IsOptional()
-  @IsBoolean()
-  cookingCompleted?: boolean;
 }
