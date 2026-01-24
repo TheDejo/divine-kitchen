@@ -45,8 +45,9 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
             {error && <div style={{ color: 'red', marginBottom: '10px' }}>Error: {error}</div>}
 
             <div style={{ marginBottom: '12px' }}>
-                <label style={{ display: 'block', marginBottom: '4px' }}>Name</label>
+                <label htmlFor="name" style={{ display: 'block', marginBottom: '4px' }}>Name</label>
                 <input
+                    id="name"
                     type="text"
                     required
                     value={formData.name}
@@ -56,8 +57,9 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
             </div>
 
             <div style={{ marginBottom: '12px' }}>
-                <label style={{ display: 'block', marginBottom: '4px' }}>Description</label>
+                <label htmlFor="description" style={{ display: 'block', marginBottom: '4px' }}>Description</label>
                 <textarea
+                    id="description"
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                     style={{ width: '100%', padding: '8px', boxSizing: 'border-box', minHeight: '80px' }}
@@ -65,8 +67,9 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
             </div>
 
             <div style={{ marginBottom: '12px' }}>
-                <label style={{ display: 'block', marginBottom: '4px' }}>Difficulty</label>
+                <label htmlFor="difficulty" style={{ display: 'block', marginBottom: '4px' }}>Difficulty</label>
                 <select
+                    id="difficulty"
                     value={formData.difficulty}
                     onChange={(e) => setFormData({ ...formData, difficulty: e.target.value as DIFFICULTY })}
                     style={{ width: '100%', padding: '8px' }}
@@ -78,8 +81,9 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
             </div>
 
             <div style={{ marginBottom: '12px' }}>
-                <label style={{ display: 'block', marginBottom: '4px' }}>Rating (1-5)</label>
+                <label htmlFor="rating" style={{ display: 'block', marginBottom: '4px' }}>Rating (1-5)</label>
                 <input
+                    id="rating"
                     type="number"
                     min="1"
                     max="5"
@@ -91,8 +95,9 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
             </div>
 
             <div style={{ marginBottom: '12px' }}>
-                <label style={{ display: 'block', marginBottom: '4px' }}>Cook Time (minutes)</label>
+                <label htmlFor="cookTime" style={{ display: 'block', marginBottom: '4px' }}>Cook Time (minutes)</label>
                 <input
+                    id="cookTime"
                     type="number"
                     min="1"
                     required

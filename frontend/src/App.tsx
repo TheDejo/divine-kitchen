@@ -20,7 +20,7 @@ function App() {
         {recipes.length === 0 ? (
           <p>No recipes yet. Add your first recipe above!</p>
         ) : (
-          recipes.map((recipe) => (
+          recipes.map((recipe: import('./services/recipeService').Recipe) => (
             <RecipeCard
               key={recipe.id}
               recipe={recipe}

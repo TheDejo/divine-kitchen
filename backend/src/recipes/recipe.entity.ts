@@ -1,9 +1,9 @@
 export interface Recipe {
-  id: string; // UUID
+  id: string;
   name: string;
   description?: string;
   difficulty: 'easy' | 'medium' | 'hard';
-  rating: number; // 1-5
+  rating: number;
   cookTimeMinutes: number;
   createdAt: Date;
   updatedAt: Date;
