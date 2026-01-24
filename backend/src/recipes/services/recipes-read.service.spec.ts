@@ -27,29 +27,35 @@ describe('RecipesReadService', () => {
     });
 
     describe('findAll', () => {
-        it('should return an array of recipes', () => {
-            const recipes = service.findAll();
-            expect(recipes).toBeDefined();
-            expect(Array.isArray(recipes)).toBe(true);
-            expect(recipes.length).toBe(3); // Mock has 3
-        });
+        describe('Happy Path', () => {
+            it('should return an array of recipes', () => {
+                const recipes = service.findAll();
+                expect(recipes).toBeDefined();
+                expect(Array.isArray(recipes)).toBe(true);
+                expect(recipes.length).toBe(3);
+            });
 
-        it('should paginate results', () => {
-            const recipes = service.findAll(1, 2);
-            expect(recipes.length).toBe(2);
-            expect(recipes[0].id).toBe('1');
-            expect(recipes[1].id).toBe('2');
+            it('should paginate results', () => {
+                const recipes = service.findAll(1, 2);
+                expect(recipes.length).toBe(2);
+                expect(recipes[0].id).toBe('1');
+                expect(recipes[1].id).toBe('2');
+            });
         });
     });
 
     describe('findOne', () => {
-        it('should return a single recipe', () => {
-            expect(service.findOne('1')).toBeDefined();
-            expect(service.findOne('1').id).toBe('1');
+        describe('Happy Path', () => {
+            it('should return a single recipe', () => {
+                expect(service.findOne('1')).toBeDefined();
+                expect(service.findOne('1').id).toBe('1');
+            });
         });
 
-        it('should throw NotFoundException if not found', () => {
-            expect(() => service.findOne('999')).toThrow(NotFoundException);
+        describe('Error Path', () => {
+            it('should throw NotFoundException if not found', () => {
+                expect(() => service.findOne('999')).toThrow(NotFoundException);
+            });
         });
     });
 });

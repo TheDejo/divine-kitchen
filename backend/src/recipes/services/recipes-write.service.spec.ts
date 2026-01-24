@@ -49,59 +49,69 @@ describe('RecipesWriteService', () => {
     });
 
     describe('create', () => {
-        it('should create a new recipe with generated IDs (recipe + steps)', () => {
-            const dto = {
-                name: 'New',
-                difficulty: 'easy' as const,
-                rating: 5,
-                cookTimeMinutes: 30,
-                description: 'Description',
-                steps: [{ description: 'New Step', isCompleted: false }],
-                cookingCompleted: false
-            };
-            const result = service.create(dto);
+        describe('Happy Path', () => {
+            it('should create a new recipe with generated IDs (recipe + steps)', () => {
+                const dto = {
+                    name: 'New',
+                    difficulty: 'easy' as const,
+                    rating: 5,
+                    cookTimeMinutes: 30,
+                    description: 'Description',
+                    steps: [{ description: 'New Step', isCompleted: false }],
+                    cookingCompleted: false
+                };
+                const result = service.create(dto);
 
-            expect(result).toBeDefined();
-            expect(result.id).toBeDefined();
-            expect(result.steps[0].id).toBeDefined();
-            expect(result.steps[0].description).toEqual('New Step');
-            expect(fs.writeFileSync).toHaveBeenCalled();
+                expect(result).toBeDefined();
+                expect(result.id).toBeDefined();
+                expect(result.steps[0].id).toBeDefined();
+                expect(result.steps[0].description).toEqual('New Step');
+                expect(fs.writeFileSync).toHaveBeenCalled();
+            });
         });
     });
 
     describe('update', () => {
-        it('should update a recipe by ID', () => {
-            const dto = { rating: 1 };
-            const result = service.update('20', dto);
+        describe('Happy Path', () => {
+            it('should update a recipe by ID', () => {
+                const dto = { rating: 1 };
+                const result = service.update('20', dto);
 
-            expect(result.rating).toEqual(1);
-            expect(result.id).toEqual('20');
-            expect(fs.writeFileSync).toHaveBeenCalled();
+                expect(result.rating).toEqual(1);
+                expect(result.id).toEqual('20');
+                expect(fs.writeFileSync).toHaveBeenCalled();
+            });
+
+            it('should auto-generate IDs for new steps in update', () => {
+                const dto = { steps: [{ description: 'Updated Step', isCompleted: false }] };
+                const result = service.update('20', dto);
+                expect(result.steps[0].id).toBeDefined();
+            });
         });
 
-        it('should throw NotFoundException if id invalid', () => {
-            expect(() => service.update('99', {})).toThrow(NotFoundException);
-        });
-
-        it('should auto-generate IDs for new steps in update', () => {
-            const dto = { steps: [{ description: 'Updated Step', isCompleted: false }] };
-            const result = service.update('20', dto);
-            expect(result.steps[0].id).toBeDefined();
+        describe('Error Path', () => {
+            it('should throw NotFoundException if id invalid', () => {
+                expect(() => service.update('99', {})).toThrow(NotFoundException);
+            });
         });
     });
 
     describe('remove', () => {
-        it('should remove a recipe by ID', () => {
-            service.remove('20');
-            expect(fs.writeFileSync).toHaveBeenCalled();
-            const writeCall = (fs.writeFileSync as jest.Mock).mock.calls[0];
-            const savedData = JSON.parse(writeCall[1]);
-            expect(savedData.length).toBe(1);
-            expect(savedData[0].id).toBe('10');
+        describe('Happy Path', () => {
+            it('should remove a recipe by ID', () => {
+                service.remove('20');
+                expect(fs.writeFileSync).toHaveBeenCalled();
+                const writeCall = (fs.writeFileSync as jest.Mock).mock.calls[0];
+                const savedData = JSON.parse(writeCall[1]);
+                expect(savedData.length).toBe(1);
+                expect(savedData[0].id).toBe('10');
+            });
         });
 
-        it('should throw NotFoundException if id invalid', () => {
-            expect(() => service.remove('99')).toThrow(NotFoundException);
+        describe('Error Path', () => {
+            it('should throw NotFoundException if id invalid', () => {
+                expect(() => service.remove('99')).toThrow(NotFoundException);
+            });
         });
     });
 });
