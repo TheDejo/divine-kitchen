@@ -29,16 +29,20 @@ describe('RecipesReadController', () => {
     });
 
     describe('findAll', () => {
-        it('should return an array of recipes', async () => {
-            expect(await controller.findAll({ page: 1, limit: 10 })).toEqual([]);
-            expect(mockRecipesService.findAll).toHaveBeenCalledWith(1, 10);
+        describe('Happy Path', () => {
+            it('should return an array of recipes', async () => {
+                expect(await controller.findAll({ page: 1, limit: 10 })).toEqual([]);
+                expect(mockRecipesService.findAll).toHaveBeenCalledWith(1, 10);
+            });
         });
     });
 
     describe('findOne', () => {
-        it('should return a single recipe', async () => {
-            expect(await controller.findOne('1')).toEqual({});
-            expect(mockRecipesService.findOne).toHaveBeenCalledWith('1');
+        describe('Happy Path', () => {
+            it('should return a single recipe', async () => {
+                expect(await controller.findOne('1')).toEqual({});
+                expect(mockRecipesService.findOne).toHaveBeenCalledWith('1');
+            });
         });
     });
 });
