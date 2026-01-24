@@ -1,62 +1,25 @@
 [
   {
-    "name": "meringue",
+    "id": "8653ff84-d5bd-4efd-a2db-2137de435faf",
+    "name": "Classic Spaghetti Bolognese",
+    "description": "A rich and savory meat sauce served over spaghetti.",
     "difficulty": "medium",
-    "rating": 3,
-    "cookTimeMinutes": 60
-  },
-  {
-    "name": "pasta carbonara",
-    "difficulty": "easy",
-    "rating": 4,
-    "cookTimeMinutes": 25
-  },
-  {
-    "name": "beef stew",
-    "difficulty": "hard",
     "rating": 5,
-    "cookTimeMinutes": 120
-  },
-  {
-    "name": "pancakes",
-    "difficulty": "easy",
-    "rating": 5,
-    "cookTimeMinutes": 15
-  },
-  {
-    "name": "chocolate cake",
-    "difficulty": "medium",
-    "rating": 4,
-    "cookTimeMinutes": 40
-  },
-  {
-    "name": "sushi rolls",
-    "difficulty": "hard",
-    "rating": 3,
-    "cookTimeMinutes": 60
-  },
-  {
-    "name": "apple pie",
-    "difficulty": "medium",
-    "rating": 4,
-    "cookTimeMinutes": 90
-  },
-  {
-    "name": "grilled cheese sandwich with extra mayonnaise and various extra condiments including but not limited to mustard, ketchup, and hot sauce",
-    "difficulty": "easy",
-    "rating": 5,
-    "cookTimeMinutes": 10
-  },
-  {
-    "name": "caesar salad",
-    "difficulty": "easy",
-    "rating": 3,
-    "cookTimeMinutes": 10
-  },
-  {
-    "name": "chicken curry",
-    "difficulty": "hard",
-    "rating": 4,
-    "cookTimeMinutes": 75
+    "cookTimeMinutes": 45,
+    "steps": [
+      {
+        "description": "Sauté onions and garlic.",
+        "isCompleted": false,
+        "id": "2bace588-b639-4211-af89-e900f84afab5"
+      },
+      {
+        "description": "Brown the ground beef.",
+        "isCompleted": false,
+        "id": "d84a79c5-35fc-4965-a41c-ae7813b5169d"
+      }
+    ],
+    "cookingCompleted": false,
+    "createdAt": "2026-01-24T11:02:21.068Z",
+    "updatedAt": "2026-01-24T11:02:21.068Z"
   }
 ]

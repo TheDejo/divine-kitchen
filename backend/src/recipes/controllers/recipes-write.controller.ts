@@ -2,8 +2,11 @@ import { Controller, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { RecipesWriteService } from '../services/recipes-write.service';
 import { CreateRecipeDto } from '../dto/create-recipe.dto';
 import { UpdateRecipeDto } from '../dto/update-recipe.dto';
+import { constants } from '../../config/constants';
 
-@Controller('recipes')
+const { RECIPE_ROUTES } = constants;
+
+@Controller(RECIPE_ROUTES.BASE)
 export class RecipesWriteController {
     constructor(private readonly recipesService: RecipesWriteService) { }
 
@@ -12,13 +15,13 @@ export class RecipesWriteController {
         return this.recipesService.create(createRecipeDto);
     }
 
-    @Patch(':id')
-    update(@Param('id') id: string, @Body() updateRecipeDto: UpdateRecipeDto) {
+    @Patch(RECIPE_ROUTES.BY_ID)
+    update(@Param(RECIPE_ROUTES.ID_PARAM) id: string, @Body() updateRecipeDto: UpdateRecipeDto) {
         return this.recipesService.update(id, updateRecipeDto);
     }
 
-    @Delete(':id')
-    remove(@Param('id') id: string) {
+    @Delete(RECIPE_ROUTES.BY_ID)
+    remove(@Param(RECIPE_ROUTES.ID_PARAM) id: string) {
         return this.recipesService.remove(id);
     }
 }
