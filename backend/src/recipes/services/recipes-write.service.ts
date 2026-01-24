@@ -1,68 +1,93 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Recipe } from '../recipe.entity';
+import { Recipe, RecipeStep } from '../recipe.entity';
 import { CreateRecipeDto } from '../dto/create-recipe.dto';
 import { UpdateRecipeDto } from '../dto/update-recipe.dto';
 import * as fs from 'fs';
 import * as path from 'path';
 import { constants } from '../../config/constants';
+import * as crypto from 'crypto';
 
-const { DATA, ENCODING, ID_OFFSET } = constants;
+const { DATA, ENCODING, JSON_SPACING } = constants;
 
 @Injectable()
 export class RecipesWriteService {
     private readonly dataPath = path.join(process.cwd(), DATA.recipe);
 
-    private loadRawRecipes(): Omit<Recipe, 'id' | 'createdAt'>[] {
+    private loadRecipes(): Recipe[] {
         const fileContent = fs.readFileSync(this.dataPath, ENCODING);
         return JSON.parse(fileContent);
     }
 
-    private saveRecipes(recipes: Omit<Recipe, 'id' | 'createdAt'>[]): void {
-        fs.writeFileSync(this.dataPath, JSON.stringify(recipes, null, 2), ENCODING);
+    private saveRecipes(recipes: Recipe[]): void {
+        fs.writeFileSync(this.dataPath, JSON.stringify(recipes, null, JSON_SPACING), ENCODING);
+    }
+
+    private generateStepIds(steps: any[]): RecipeStep[] {
+        return steps.map(step => ({
+            ...step,
+            id: crypto.randomUUID(), // Always generate new ID
+        }));
     }
 
     create(createRecipeDto: CreateRecipeDto): Recipe {
-        const recipes = this.loadRawRecipes();
-        const newRecipe = {
+        const recipes = this.loadRecipes();
+        const now = new Date();
+
+        // Generate new Recipe ID: max(ids) + 1
+        // Robustness: Handle non-numeric IDs gracefully or default to 1
+        const maxId = recipes.reduce((max, recipe) => {
+            const id = parseInt(recipe.id);
+            return !isNaN(id) && id > max ? id : max;
+        }, 0);
+        const newId = (maxId + 1).toString();
+
+        const newRecipe: Recipe = {
+            id: newId,
             ...createRecipeDto,
+            steps: this.generateStepIds(createRecipeDto.steps || []),
+            cookingCompleted: createRecipeDto.cookingCompleted ?? false,
+            createdAt: now,
+            updatedAt: now,
         };
+
         recipes.push(newRecipe);
         this.saveRecipes(recipes);
 
-        return {
-            id: (recipes.length - 1 + ID_OFFSET).toString(),
-            createdAt: new Date(),
-            ...newRecipe,
-        };
+        return newRecipe;
     }
 
     update(id: string, updateRecipeDto: UpdateRecipeDto): Recipe {
-        const recipes = this.loadRawRecipes();
-        const index = parseInt(id) - ID_OFFSET;
+        const recipes = this.loadRecipes();
+        const index = recipes.findIndex(r => r.id === id);
 
-        if (index < 0 || index >= recipes.length) {
+        if (index === -1) {
             throw new NotFoundException(`Recipe with ID ${id} not found`);
+        }
+
+        const now = new Date();
+
+        let updatedSteps = recipes[index].steps;
+        if (updateRecipeDto.steps) {
+            updatedSteps = this.generateStepIds(updateRecipeDto.steps);
         }
 
         const updatedRecipe = {
             ...recipes[index],
             ...updateRecipeDto,
+            steps: updatedSteps,
+            updatedAt: now,
         };
         recipes[index] = updatedRecipe;
         this.saveRecipes(recipes);
 
-        return {
-            id,
-            createdAt: new Date(), // Real app matches DB; here we regenerate or it's transient
-            ...updatedRecipe,
-        };
+        return updatedRecipe;
     }
 
     remove(id: string): void {
-        const recipes = this.loadRawRecipes();
-        const index = parseInt(id) - ID_OFFSET;
+        const recipes = this.loadRecipes();
+        const index = recipes.findIndex(r => r.id === id);
 
-        if (index < 0 || index >= recipes.length) {
+        if (index === -1) {
             throw new NotFoundException(`Recipe with ID ${id} not found`);
         }
 
