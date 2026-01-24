@@ -2,12 +2,13 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { RecipeCard } from './RecipeCard';
 import { Recipe } from '../services/recipeService';
+import { DIFFICULTY } from '../utils/types';
 
 describe('RecipeCard', () => {
   const mockRecipe: Recipe = {
     id: '1',
     name: 'Pasta Carbonara',
-    difficulty: 'medium',
+    difficulty: DIFFICULTY.MEDIUM,
     rating: 4,
     cookTimeMinutes: 30,
     createdAt: new Date().toISOString(),

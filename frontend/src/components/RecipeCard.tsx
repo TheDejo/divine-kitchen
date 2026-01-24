@@ -1,23 +1,18 @@
 import React from 'react';
 import { Recipe } from '../services/recipeService';
-
+import { DIFFICULTY_EMOJI } from '../utils/types';
 interface RecipeCardProps {
   recipe: Recipe;
   onRatingChange: (id: string, rating: number) => void;
   onDelete: (id: string) => void;
 }
 
-/* TODO Update the RecipeCard component to also display the description */ 
 export const RecipeCard: React.FC<RecipeCardProps> = ({
   recipe,
   onRatingChange,
   onDelete,
 }) => {
-  const difficultyEmoji = {
-    easy: '😊',
-    medium: '🤔',
-    hard: '😰',
-  };
+
 
   return (
     <div
@@ -30,7 +25,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({
       }}
     >
       <h3>
-        {recipe.name} {difficultyEmoji[recipe.difficulty]}
+        {recipe.name} {DIFFICULTY_EMOJI[recipe.difficulty]}
       </h3>
       <p>
         Difficulty: <strong>{recipe.difficulty}</strong> | Cook Time:{' '}
