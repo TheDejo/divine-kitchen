@@ -25,21 +25,14 @@ export class RecipesWriteService {
     private generateStepIds(steps: any[]): RecipeStep[] {
         return steps.map(step => ({
             ...step,
-            id: crypto.randomUUID(), // Always generate new ID
+            id: crypto.randomUUID(),
         }));
     }
 
     create(createRecipeDto: CreateRecipeDto): Recipe {
         const recipes = this.loadRecipes();
         const now = new Date();
-
-        // Generate new Recipe ID: max(ids) + 1
-        // Robustness: Handle non-numeric IDs gracefully or default to 1
-        const maxId = recipes.reduce((max, recipe) => {
-            const id = parseInt(recipe.id);
-            return !isNaN(id) && id > max ? id : max;
-        }, 0);
-        const newId = (maxId + 1).toString();
+        const newId = crypto.randomUUID();
 
         const newRecipe: Recipe = {
             id: newId,

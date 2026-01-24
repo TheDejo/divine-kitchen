@@ -8,7 +8,30 @@ jest.mock('fs');
 describe('RecipesWriteService', () => {
     let service: RecipesWriteService;
     const mockRecipes = [
-        { name: 'r1', difficulty: 'easy', rating: 5, cookTimeMinutes: 10 }
+        {
+            id: '10',
+            name: 'r1',
+            difficulty: 'easy',
+            rating: 5,
+            cookTimeMinutes: 10,
+            description: 'desc',
+            steps: [{ id: 's1', description: 'step1', isCompleted: false }],
+            cookingCompleted: false,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        },
+        {
+            id: '20',
+            name: 'r2',
+            difficulty: 'easy',
+            rating: 5,
+            cookTimeMinutes: 10,
+            description: 'desc',
+            steps: [],
+            cookingCompleted: false,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }
     ];
 
     beforeEach(async () => {
@@ -26,41 +49,59 @@ describe('RecipesWriteService', () => {
     });
 
     describe('create', () => {
-        it('should create a new recipe and save it', () => {
-            const dto = { name: 'New', difficulty: 'easy' as const, rating: 5, cookTimeMinutes: 30 };
+        it('should create a new recipe with generated IDs (recipe + steps)', () => {
+            const dto = {
+                name: 'New',
+                difficulty: 'easy' as const,
+                rating: 5,
+                cookTimeMinutes: 30,
+                description: 'Description',
+                steps: [{ description: 'New Step', isCompleted: false }],
+                cookingCompleted: false
+            };
             const result = service.create(dto);
 
             expect(result).toBeDefined();
-            expect(result.name).toEqual(dto.name);
+            expect(result.id).toBeDefined();
+            expect(result.steps[0].id).toBeDefined();
+            expect(result.steps[0].description).toEqual('New Step');
             expect(fs.writeFileSync).toHaveBeenCalled();
-            // ID should be index + offset. length is 1 before push, so index 1. 1+1=2.
-            // Wait, mock returns 1 item (index 0). Push makes it 2 items. New item at index 1.
-            // ID = 1 + 1 = 2.
-            expect(result.id).toEqual('2');
         });
     });
 
     describe('update', () => {
-        it('should update a recipe and save it', () => {
-            const dto = { rating: 4 };
-            const result = service.update('1', dto); // ID 1 corresponds to index 0 (1 - 1)
+        it('should update a recipe by ID', () => {
+            const dto = { rating: 1 };
+            const result = service.update('20', dto);
 
-            expect(result.rating).toEqual(4);
+            expect(result.rating).toEqual(1);
+            expect(result.id).toEqual('20');
             expect(fs.writeFileSync).toHaveBeenCalled();
         });
 
         it('should throw NotFoundException if id invalid', () => {
             expect(() => service.update('99', {})).toThrow(NotFoundException);
         });
+
+        it('should auto-generate IDs for new steps in update', () => {
+            const dto = { steps: [{ description: 'Updated Step', isCompleted: false }] };
+            const result = service.update('20', dto);
+            expect(result.steps[0].id).toBeDefined();
+        });
     });
 
     describe('remove', () => {
-        it('should remove a recipe and save it', () => {
-            service.remove('1'); // ID 1 -> Index 0
+        it('should remove a recipe by ID', () => {
+            service.remove('20');
             expect(fs.writeFileSync).toHaveBeenCalled();
             const writeCall = (fs.writeFileSync as jest.Mock).mock.calls[0];
             const savedData = JSON.parse(writeCall[1]);
-            expect(savedData.length).toBe(0);
+            expect(savedData.length).toBe(1);
+            expect(savedData[0].id).toBe('10');
+        });
+
+        it('should throw NotFoundException if id invalid', () => {
+            expect(() => service.remove('99')).toThrow(NotFoundException);
         });
     });
 });
