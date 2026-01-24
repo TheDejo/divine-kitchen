@@ -10,6 +10,7 @@ export interface Recipe {
   difficulty: DIFFICULTY;
   rating: number;
   cookTimeMinutes: number;
+  description?: string;
   createdAt: string;
 }
 
@@ -17,6 +18,7 @@ export interface CreateRecipeRequest {
   name: string;
   difficulty: DIFFICULTY;
   rating: number;
+  description: string;
   cookTimeMinutes: number;
 }
 

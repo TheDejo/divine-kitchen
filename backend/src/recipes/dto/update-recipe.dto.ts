@@ -6,6 +6,10 @@ export class UpdateRecipeDto {
   name?: string;
 
   @IsOptional()
+  @IsString()
+  description?: string;
+
+  @IsOptional()
   @IsIn(['easy', 'medium', 'hard'])
   difficulty?: 'easy' | 'medium' | 'hard';
 
