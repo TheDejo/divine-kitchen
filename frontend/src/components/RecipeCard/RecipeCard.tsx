@@ -1,6 +1,6 @@
 import React from 'react';
-import { Recipe } from '../services/recipeService';
-import { DIFFICULTY_EMOJI } from '../utils/types';
+import { Recipe } from '../../services/recipeService';
+import { DIFFICULTY_EMOJI } from '../../utils/types';
 interface RecipeCardProps {
   recipe: Recipe;
   onRatingChange: (id: string, rating: number) => void;
