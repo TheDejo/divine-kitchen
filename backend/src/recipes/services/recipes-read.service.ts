@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { constants } from '../../config/constants';
 
-const { DEFAULT_PAGE, DEFAULT_LIMIT, ID_OFFSET, DATA, ENCODING } = constants;
+const { DEFAULT_PAGE, DEFAULT_LIMIT, DATA, ENCODING } = constants;
 
 @Injectable()
 export class RecipesReadService {
