@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CreateRecipeRequest } from '../../services/recipeService';
-import { DIFFICULTY } from '../../utils/types';
+import { BUTTON_VARIANT, DIFFICULTY } from '../../utils/types';
+import { Button } from '../Button/Button';
 
 interface RecipeFormProps {
     createRecipe: (recipe: CreateRecipeRequest) => Promise<void>;
@@ -9,6 +10,7 @@ interface RecipeFormProps {
 export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
     const [formData, setFormData] = useState<CreateRecipeRequest>({
         name: '',
+        description: '',
         difficulty: DIFFICULTY.EASY,
         rating: 5,
         cookTimeMinutes: 30,
@@ -25,6 +27,7 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
             await createRecipe(formData);
             setFormData({
                 name: '',
+                description: '',
                 difficulty: DIFFICULTY.EASY,
                 rating: 5,
                 cookTimeMinutes: 30,
@@ -49,6 +52,15 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
+                />
+            </div>
+
+            <div style={{ marginBottom: '12px' }}>
+                <label style={{ display: 'block', marginBottom: '4px' }}>Description</label>
+                <textarea
+                    value={formData.description}
+                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    style={{ width: '100%', padding: '8px', boxSizing: 'border-box', minHeight: '80px' }}
                 />
             </div>
 
@@ -90,20 +102,13 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
                 />
             </div>
 
-            <button
+            <Button
                 type="submit"
                 disabled={submitting}
-                style={{
-                    padding: '10px 20px',
-                    backgroundColor: '#4CAF50',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: submitting ? 'not-allowed' : 'pointer'
-                }}
+                variant={BUTTON_VARIANT.PRIMARY}
             >
                 {submitting ? 'Creating...' : 'Add Recipe'}
-            </button>
+            </Button>
         </form>
     );
 };

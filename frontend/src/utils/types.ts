@@ -9,3 +9,9 @@ export enum DIFFICULTY_EMOJI {
     medium = '🤔',
     hard = '😰',
 }
+
+export enum BUTTON_VARIANT {
+    PRIMARY = 'primary',
+    SECONDARY = 'secondary',
+    DANGER = 'danger',
+}
