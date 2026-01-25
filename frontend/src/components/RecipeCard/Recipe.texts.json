@@ -2,5 +2,7 @@
     "difficulty": "Difficulty:",
     "cookTime": "| Cook Time: {{cookTimeMinutes}} min",
     "rating": "Rating",
-    "deleteCta": "Delete"
+    "deleteCta": "Delete",
+    "rateStarAria": "Rate {{star}} out of 5 stars",
+    "deleteAria": "Delete {{name}}"
 }

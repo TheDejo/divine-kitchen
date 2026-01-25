@@ -43,8 +43,16 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
 
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
-            <h3 className={styles.title}>{texts.title}</h3>
-            {error && <div className={styles.error}>Error: {error}</div>}
+            <h2 className={styles.title}>{texts.title}</h2>
+            {error && (
+                <div
+                    className={styles.error}
+                    role="alert"
+                    aria-live="assertive"
+                >
+                    Error: {error}
+                </div>
+            )}
 
             <div className={styles.field}>
                 <label htmlFor="name" className={styles.label}>{texts.name}</label>

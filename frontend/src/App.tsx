@@ -12,7 +12,7 @@ function App() {
   if (error) return <div className={styles.error}>{localTexts.errorLoadingRecipes.replace('{{recipeError}}', error)}</div>;
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <h1 className={styles.title}>{localTexts.title}</h1>
 
       <RecipeForm createRecipe={handleCreateRecipe} />
@@ -32,7 +32,7 @@ function App() {
           ))
         )}
       </div>
-    </div>
+    </main>
   );
 }
 

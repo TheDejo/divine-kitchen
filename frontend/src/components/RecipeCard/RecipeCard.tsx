@@ -17,15 +17,26 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({
   onDelete,
 }) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
+  const titleId = `recipe-title-${recipe.id}`;
 
   return (
     <article
       className={styles.card}
       onClick={() => setIsExpanded(!isExpanded)}
+      aria-labelledby={titleId}
     >
-      <h3 className={styles.title}>
-        {recipe.name}
-        <span>{DIFFICULTY_EMOJI[recipe.difficulty]}</span>
+      <h3 className={styles.title} id={titleId}>
+        <button
+          className={styles.titleButton}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsExpanded(!isExpanded);
+          }}
+          aria-expanded={isExpanded}
+        >
+          {recipe.name}
+          <span aria-hidden="true">{DIFFICULTY_EMOJI[recipe.difficulty]}</span>
+        </button>
       </h3>
       <p className={styles.meta}>
         {localTexts.difficulty} <strong>{recipe.difficulty}</strong> {localTexts.cookTime.replace('{{cookTimeMinutes}}', recipe.cookTimeMinutes.toString())}
@@ -40,16 +51,22 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({
       <div
         className={styles.ratingContainer}
         onClick={(e) => e.stopPropagation()}
+        role="group"
+        aria-label={localTexts.rating}
       >
-        <span>{localTexts.rating}:</span>
+        <span aria-hidden="true">{localTexts.rating}:</span>
         {[1, 2, 3, 4, 5].map((star) => (
-          <span
+          <button
             key={star}
+            type="button"
             onClick={() => onRatingChange(recipe.id, star)}
             className={styles.star}
+            aria-label={localTexts.rateStarAria.replace('{{star}}', star.toString())}
+            aria-pressed={star <= recipe.rating}
+            style={{ background: 'none', border: 'none', padding: 0 }}
           >
             {star <= recipe.rating ? '⭐' : '☆'}
-          </span>
+          </button>
         ))}
       </div>
 
@@ -60,6 +77,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({
             onDelete(recipe.id);
           }}
           variant={BUTTON_VARIANT.DANGER}
+          aria-label={localTexts.deleteAria.replace('{{name}}', recipe.name)}
         >
           {localTexts.deleteCta}
         </Button>
