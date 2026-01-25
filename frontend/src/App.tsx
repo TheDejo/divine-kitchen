@@ -2,26 +2,27 @@ import React from 'react';
 import { useRecipes } from './utils/hooks/useRecipes';
 import { RecipeCard } from './components/RecipeCard/RecipeCard';
 import { RecipeForm } from './components/RecipeForm/RecipeForm';
+import localTexts from './App.texts.json';
 import styles from './App.module.css';
 
 function App() {
   const { recipes, loading, error, handleRatingChange, handleDelete, handleCreateRecipe } = useRecipes();
 
-  if (loading) return <div className={styles.loading}>Loading recipes...</div>;
-  if (error) return <div className={styles.error}>Error: {error}</div>;
+  if (loading) return <div className={styles.loading}>{localTexts.loadingRecipes}</div>;
+  if (error) return <div className={styles.error}>{localTexts.errorLoadingRecipes.replace('{{recipeError}}', error)}</div>;
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>🍳 Kitchen Dashboard</h1>
+      <h1 className={styles.title}>{localTexts.title}</h1>
 
       <RecipeForm createRecipe={handleCreateRecipe} />
 
       <div className={styles.recipeList}>
-        <h2 className={styles.subtitle}>Your Recipes ({recipes.length})</h2>
-        {recipes.length === 0 ? (
-          <p className={styles.emptyState}>No recipes yet. Add your first recipe above!</p>
+        <h2 className={styles.subtitle}>{localTexts.subtitle.replace('{{recipesLength}}', recipes.length.toString())}</h2>
+        {!recipes.length ? (
+          <p className={styles.emptyState}>{localTexts.emptyState}</p>
         ) : (
-          recipes.map((recipe: import('./services/recipeService').Recipe) => (
+          recipes.map((recipe) => (
             <RecipeCard
               key={recipe.id}
               recipe={recipe}

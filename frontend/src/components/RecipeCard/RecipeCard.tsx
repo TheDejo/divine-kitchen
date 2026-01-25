@@ -2,6 +2,7 @@ import React from 'react';
 import { Recipe } from '../../services/recipeService';
 import { BUTTON_VARIANT, DIFFICULTY_EMOJI } from '../../utils/types';
 import { Button } from '../Button/Button';
+import localTexts from './Recipe.texts.json';
 import styles from './RecipeCard.module.css';
 
 interface RecipeCardProps {
@@ -27,8 +28,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({
         <span>{DIFFICULTY_EMOJI[recipe.difficulty]}</span>
       </h3>
       <p className={styles.meta}>
-        Difficulty: <strong>{recipe.difficulty}</strong> | Cook Time:{' '}
-        {recipe.cookTimeMinutes} min
+        {localTexts.difficulty} <strong>{recipe.difficulty}</strong> {localTexts.cookTime.replace('{{cookTimeMinutes}}', recipe.cookTimeMinutes.toString())}
       </p>
 
       {isExpanded && recipe.description && (
@@ -41,7 +41,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({
         className={styles.ratingContainer}
         onClick={(e) => e.stopPropagation()}
       >
-        <span>Rating:</span>
+        <span>{localTexts.rating}:</span>
         {[1, 2, 3, 4, 5].map((star) => (
           <span
             key={star}
@@ -61,7 +61,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({
           }}
           variant={BUTTON_VARIANT.DANGER}
         >
-          Delete
+          {localTexts.deleteCta}
         </Button>
       </div>
     </article>

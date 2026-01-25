@@ -1,6 +1,6 @@
 .container {
     padding: var(--spacing-xl);
-    max-width: 1200px;
+    max-width: var(--layout-max-width);
     margin: 0 auto;
     background-color: var(--color-background);
     min-height: 100vh;
@@ -10,7 +10,7 @@
     margin-top: 0;
     margin-bottom: var(--spacing-xl);
     color: var(--color-text-primary);
-    font-size: 2.5rem;
+    font-size: var(--font-size-2xl);
     /* Larger than xl for main title */
 }
 

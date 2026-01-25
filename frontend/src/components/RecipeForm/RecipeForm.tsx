@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CreateRecipeRequest } from '../../services/recipeService';
 import { BUTTON_VARIANT, DIFFICULTY } from '../../utils/types';
 import { Button } from '../Button/Button';
+import texts from './RecipeForm.texts.json';
 import styles from './RecipeForm.module.css';
 
 interface RecipeFormProps {
@@ -42,11 +43,11 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
 
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
-            <h3 className={styles.title}>Add New Recipe</h3>
+            <h3 className={styles.title}>{texts.title}</h3>
             {error && <div className={styles.error}>Error: {error}</div>}
 
             <div className={styles.field}>
-                <label htmlFor="name" className={styles.label}>Name</label>
+                <label htmlFor="name" className={styles.label}>{texts.name}</label>
                 <input
                     id="name"
                     type="text"
@@ -58,7 +59,7 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
             </div>
 
             <div className={styles.field}>
-                <label htmlFor="description" className={styles.label}>Description</label>
+                <label htmlFor="description" className={styles.label}>{texts.description}</label>
                 <textarea
                     id="description"
                     value={formData.description}
@@ -68,7 +69,7 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
             </div>
 
             <div className={styles.field}>
-                <label htmlFor="difficulty" className={styles.label}>Difficulty</label>
+                <label htmlFor="difficulty" className={styles.label}>{texts.difficulty}</label>
                 <select
                     id="difficulty"
                     value={formData.difficulty}
@@ -82,7 +83,7 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
             </div>
 
             <div className={styles.field}>
-                <label htmlFor="rating" className={styles.label}>Rating (1-5)</label>
+                <label htmlFor="rating" className={styles.label}>{texts.ratingLabel}</label>
                 <input
                     id="rating"
                     type="number"
@@ -96,7 +97,7 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
             </div>
 
             <div className={styles.field}>
-                <label htmlFor="cookTime" className={styles.label}>Cook Time (minutes)</label>
+                <label htmlFor="cookTime" className={styles.label}>{texts.cookTimeMinutes}</label>
                 <input
                     id="cookTime"
                     type="number"
@@ -114,7 +115,7 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
                     disabled={submitting}
                     variant={BUTTON_VARIANT.PRIMARY}
                 >
-                    {submitting ? 'Creating...' : 'Add Recipe'}
+                    {submitting ? texts.submitting : texts.addRecipe}
                 </Button>
             </div>
         </form>

@@ -1,0 +1,6 @@
+{
+    "difficulty": "Difficulty:",
+    "cookTime": "| Cook Time: {{cookTimeMinutes}} min",
+    "rating": "Rating",
+    "deleteCta": "Delete"
+}

@@ -1,0 +1,10 @@
+{
+    "title": "Add New Recipe",
+    "name": "Name",
+    "description": "Description",
+    "difficulty": "Difficulty",
+    "ratingLabel": "Rating (1-5)",
+    "cookTimeMinutes": "Cook Time (minutes)",
+    "submitting": "Creating...",
+    "addRecipe": "Add Recipe"
+}

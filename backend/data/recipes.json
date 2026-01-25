@@ -1,31 +1,22 @@
 [
   {
-    "id": "8653ff84-d5bd-4efd-a2db-2137de435faf",
-    "name": "Classic Spaghetti Bolognese",
-    "difficulty": "medium",
-    "rating": 4,
-    "cookTimeMinutes": 60,
-    "createdAt": "2026-01-24T11:02:21.068Z",
-    "updatedAt": "2026-01-24T21:33:14.462Z"
-  },
-  {
     "id": "8f44b1e5-afc6-4aa1-80df-f0f9a6d61984",
     "name": "Sit aut incidunt s",
     "difficulty": "medium",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
-    "rating": 3,
+    "rating": 5,
     "cookTimeMinutes": 17,
     "createdAt": "2026-01-24T21:38:01.249Z",
-    "updatedAt": "2026-01-24T21:38:16.654Z"
+    "updatedAt": "2026-01-25T07:44:13.836Z"
   },
   {
     "id": "cc38f265-91f4-42ff-8313-0bf400a18d1f",
     "name": "Aliquip sunt reicien",
     "description": "At commodo nihil ass",
     "difficulty": "medium",
-    "rating": 2,
+    "rating": 3,
     "cookTimeMinutes": 31,
     "createdAt": "2026-01-24T21:56:05.637Z",
-    "updatedAt": "2026-01-24T21:56:05.637Z"
+    "updatedAt": "2026-01-25T07:40:43.162Z"
   }
 ]
