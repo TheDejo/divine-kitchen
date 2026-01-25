@@ -20,7 +20,9 @@ export const useRecipes = () => {
         }
     };
 
-    const handleRatingChange = async (id: string, rating: number) => {
+    const handleRatingChange = async (id: string, rating: number, prevRating: number) => {
+        if (prevRating === rating) return;
+
         try {
             await recipeService.updateRating(id, rating);
             mutate();

@@ -7,7 +7,7 @@ import styles from './RecipeCard.module.css';
 
 interface RecipeCardProps {
   recipe: Recipe;
-  onRatingChange: (id: string, rating: number) => void;
+  onRatingChange: (id: string, rating: number, prevRating: number) => void;
   onDelete: (id: string) => void;
 }
 
@@ -59,7 +59,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({
           <button
             key={star}
             type="button"
-            onClick={() => onRatingChange(recipe.id, star)}
+            onClick={() => onRatingChange(recipe.id, star, recipe.rating)}
             className={styles.star}
             aria-label={localTexts.rateStarAria.replace('{{star}}', star.toString())}
             aria-pressed={star <= recipe.rating}
