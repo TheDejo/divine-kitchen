@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { constants } from '../../config/constants';
 
-const { DEFAULT_PAGE, DEFAULT_LIMIT, DATA, ENCODING } = constants;
+const { DATA, ENCODING } = constants;
 
 @Injectable()
 export class RecipesReadService {
@@ -15,11 +15,9 @@ export class RecipesReadService {
         return JSON.parse(fileContent);
     }
 
-    findAll(page: number = DEFAULT_PAGE, limit: number = DEFAULT_LIMIT): Recipe[] {
+    findAll(): Recipe[] {
         const recipes = this.loadRecipes();
-        const startIndex = (page - 1) * limit;
-        const endIndex = startIndex + limit;
-        return recipes.slice(startIndex, endIndex);
+        return recipes;
     }
 
     findOne(id: string): Recipe {

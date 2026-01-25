@@ -1,5 +1,7 @@
 import React from 'react';
+import classNames from 'classnames';
 import { BUTTON_VARIANT } from '../../utils/types';
+import styles from './Button.module.css';
 
 type ButtonVariant = BUTTON_VARIANT;
 
@@ -10,32 +12,22 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button: React.FC<ButtonProps> = ({
     children,
     variant = BUTTON_VARIANT.PRIMARY,
+    className,
     style,
     ...props
 }) => {
-    const getBackgroundColor = () => {
-        switch (variant) {
-            case BUTTON_VARIANT.DANGER: return '#ff4444';
-            case BUTTON_VARIANT.SECONDARY: return '#6c757d';
-            case BUTTON_VARIANT.PRIMARY:
-            default: return '#4CAF50';
-        }
-    };
-
-    const baseStyle: React.CSSProperties = {
-        padding: '10px 20px',
-        backgroundColor: getBackgroundColor(),
-        color: 'white',
-        border: 'none',
-        borderRadius: '4px',
-        cursor: props.disabled ? 'not-allowed' : 'pointer',
-        opacity: props.disabled ? 0.7 : 1,
-        transition: 'background-color 0.2s',
-        ...style,
-    };
+    const buttonClass = classNames(
+        styles.button,
+        {
+            [styles.primary]: variant === BUTTON_VARIANT.PRIMARY,
+            [styles.secondary]: variant === BUTTON_VARIANT.SECONDARY,
+            [styles.danger]: variant === BUTTON_VARIANT.DANGER,
+        },
+        className
+    );
 
     return (
-        <button style={baseStyle} {...props}>
+        <button className={buttonClass} style={style} {...props}>
             {children}
         </button>
     );

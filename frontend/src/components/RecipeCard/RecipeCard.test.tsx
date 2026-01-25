@@ -3,6 +3,9 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { RecipeCard } from './RecipeCard';
+import { axe, toHaveNoViolations } from 'jest-axe';
+
+expect.extend(toHaveNoViolations);
 import { Recipe } from '../../services/recipeService';
 import { DIFFICULTY } from '../../utils/types';
 
@@ -37,7 +40,8 @@ describe('RecipeCard', () => {
 
   it('should render recipe details', () => {
     renderComponent();
-    expect(screen.getByText('Pasta Carbonara 🤔')).toBeInTheDocument();
+    expect(screen.getByText('Pasta Carbonara')).toBeInTheDocument();
+    expect(screen.getByText('🤔')).toBeInTheDocument();
     expect(screen.getByText(/Difficulty:/)).toBeInTheDocument();
     expect(screen.getByText('medium')).toBeInTheDocument();
     expect(screen.getByText(/30 min/)).toBeInTheDocument();
@@ -75,5 +79,11 @@ describe('RecipeCard', () => {
 
     expect(mockOnRatingChange).toHaveBeenCalledWith('1', 5);
     expect(screen.queryByText('Delicious creamy pasta')).not.toBeInTheDocument();
+  });
+
+  it('should have no accessibility violations', async () => {
+    const { container } = renderComponent();
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

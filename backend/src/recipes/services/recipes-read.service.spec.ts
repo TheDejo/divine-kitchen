@@ -27,20 +27,11 @@ describe('RecipesReadService', () => {
     });
 
     describe('findAll', () => {
-        describe('Happy Path', () => {
-            it('should return an array of recipes', () => {
-                const recipes = service.findAll();
-                expect(recipes).toBeDefined();
-                expect(Array.isArray(recipes)).toBe(true);
-                expect(recipes.length).toBe(3);
-            });
-
-            it('should paginate results', () => {
-                const recipes = service.findAll(1, 2);
-                expect(recipes.length).toBe(2);
-                expect(recipes[0].id).toBe('1');
-                expect(recipes[1].id).toBe('2');
-            });
+        it('should return all recipes', () => {
+            const recipes = service.findAll();
+            expect(recipes).toBeDefined();
+            expect(Array.isArray(recipes)).toBe(true);
+            expect(recipes.length).toBe(3);
         });
     });
 

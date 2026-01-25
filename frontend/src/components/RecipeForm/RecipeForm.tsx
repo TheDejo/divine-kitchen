@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { CreateRecipeRequest } from '../../services/recipeService';
 import { BUTTON_VARIANT, DIFFICULTY } from '../../utils/types';
 import { Button } from '../Button/Button';
+import texts from './RecipeForm.texts.json';
+import styles from './RecipeForm.module.css';
 
 interface RecipeFormProps {
     createRecipe: (recipe: CreateRecipeRequest) => Promise<void>;
@@ -40,39 +42,47 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} style={{ padding: '20px', border: '1px solid #ccc', borderRadius: '8px', backgroundColor: '#fff', marginBottom: '24px' }}>
-            <h3>Add New Recipe</h3>
-            {error && <div style={{ color: 'red', marginBottom: '10px' }}>Error: {error}</div>}
+        <form onSubmit={handleSubmit} className={styles.form}>
+            <h2 className={styles.title}>{texts.title}</h2>
+            {error && (
+                <div
+                    className={styles.error}
+                    role="alert"
+                    aria-live="assertive"
+                >
+                    Error: {error}
+                </div>
+            )}
 
-            <div style={{ marginBottom: '12px' }}>
-                <label htmlFor="name" style={{ display: 'block', marginBottom: '4px' }}>Name</label>
+            <div className={styles.field}>
+                <label htmlFor="name" className={styles.label}>{texts.name}</label>
                 <input
                     id="name"
                     type="text"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
+                    className={styles.input}
                 />
             </div>
 
-            <div style={{ marginBottom: '12px' }}>
-                <label htmlFor="description" style={{ display: 'block', marginBottom: '4px' }}>Description</label>
+            <div className={styles.field}>
+                <label htmlFor="description" className={styles.label}>{texts.description}</label>
                 <textarea
                     id="description"
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    style={{ width: '100%', padding: '8px', boxSizing: 'border-box', minHeight: '80px' }}
+                    className={styles.textarea}
                 />
             </div>
 
-            <div style={{ marginBottom: '12px' }}>
-                <label htmlFor="difficulty" style={{ display: 'block', marginBottom: '4px' }}>Difficulty</label>
+            <div className={styles.field}>
+                <label htmlFor="difficulty" className={styles.label}>{texts.difficulty}</label>
                 <select
                     id="difficulty"
                     value={formData.difficulty}
                     onChange={(e) => setFormData({ ...formData, difficulty: e.target.value as DIFFICULTY })}
-                    style={{ width: '100%', padding: '8px' }}
+                    className={styles.select}
                 >
                     {Object.values(DIFFICULTY).map((val) => (
                         <option key={val} value={val}>{val}</option>
@@ -80,8 +90,8 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
                 </select>
             </div>
 
-            <div style={{ marginBottom: '12px' }}>
-                <label htmlFor="rating" style={{ display: 'block', marginBottom: '4px' }}>Rating (1-5)</label>
+            <div className={styles.field}>
+                <label htmlFor="rating" className={styles.label}>{texts.ratingLabel}</label>
                 <input
                     id="rating"
                     type="number"
@@ -90,12 +100,12 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
                     required
                     value={formData.rating}
                     onChange={(e) => setFormData({ ...formData, rating: parseInt(e.target.value) })}
-                    style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
+                    className={styles.input}
                 />
             </div>
 
-            <div style={{ marginBottom: '12px' }}>
-                <label htmlFor="cookTime" style={{ display: 'block', marginBottom: '4px' }}>Cook Time (minutes)</label>
+            <div className={styles.field}>
+                <label htmlFor="cookTime" className={styles.label}>{texts.cookTimeMinutes}</label>
                 <input
                     id="cookTime"
                     type="number"
@@ -103,17 +113,19 @@ export const RecipeForm: React.FC<RecipeFormProps> = ({ createRecipe }) => {
                     required
                     value={formData.cookTimeMinutes}
                     onChange={(e) => setFormData({ ...formData, cookTimeMinutes: parseInt(e.target.value) })}
-                    style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
+                    className={styles.input}
                 />
             </div>
 
-            <Button
-                type="submit"
-                disabled={submitting}
-                variant={BUTTON_VARIANT.PRIMARY}
-            >
-                {submitting ? 'Creating...' : 'Add Recipe'}
-            </Button>
+            <div className={styles.actions}>
+                <Button
+                    type="submit"
+                    disabled={submitting}
+                    variant={BUTTON_VARIANT.PRIMARY}
+                >
+                    {submitting ? texts.submitting : texts.addRecipe}
+                </Button>
+            </div>
         </form>
     );
 };

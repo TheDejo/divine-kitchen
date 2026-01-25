@@ -4,11 +4,11 @@ export enum DIFFICULTY {
     HARD = 'hard',
 }
 
-export enum DIFFICULTY_EMOJI {
-    easy = '😊',
-    medium = '🤔',
-    hard = '😰',
-}
+export const DIFFICULTY_EMOJI = {
+    [DIFFICULTY.EASY]: '😊',
+    [DIFFICULTY.MEDIUM]: '🤔',
+    [DIFFICULTY.HARD]: '😰',
+};
 
 export enum BUTTON_VARIANT {
     PRIMARY = 'primary',

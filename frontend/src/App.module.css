@@ -1,0 +1,42 @@
+.container {
+    padding: var(--spacing-xl);
+    max-width: var(--layout-max-width);
+    margin: 0 auto;
+    background-color: var(--color-background);
+    min-height: 100vh;
+}
+
+.title {
+    margin-top: 0;
+    margin-bottom: var(--spacing-xl);
+    color: var(--color-text-primary);
+    font-size: var(--font-size-2xl);
+    /* Larger than xl for main title */
+}
+
+.loading,
+.error {
+    padding: var(--spacing-xl);
+    text-align: center;
+    font-size: var(--font-size-lg);
+}
+
+.error {
+    color: var(--color-danger);
+}
+
+.recipeList {
+    margin-top: var(--spacing-xl);
+}
+
+.subtitle {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-primary);
+}
+
+.emptyState {
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    margin-top: var(--spacing-lg);
+}

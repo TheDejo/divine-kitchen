@@ -1,0 +1,7 @@
+{
+    "title": "🍳 Kitchen Dashboard",
+    "subtitle": "Your Recipes ({{recipesLength}})",
+    "emptyState": "No recipes yet. Add your first recipe above!",
+    "loadingRecipes": "Loading recipes...",
+    "errorLoadingRecipes": "Error {{recipeError}}"
+}
