@@ -37,7 +37,8 @@ describe('RecipeCard', () => {
 
   it('should render recipe details', () => {
     renderComponent();
-    expect(screen.getByText('Pasta Carbonara 🤔')).toBeInTheDocument();
+    expect(screen.getByText('Pasta Carbonara')).toBeInTheDocument();
+    expect(screen.getByText('🤔')).toBeInTheDocument();
     expect(screen.getByText(/Difficulty:/)).toBeInTheDocument();
     expect(screen.getByText('medium')).toBeInTheDocument();
     expect(screen.getByText(/30 min/)).toBeInTheDocument();
