@@ -3,6 +3,9 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { RecipeForm } from './RecipeForm';
+import { axe, toHaveNoViolations } from 'jest-axe';
+
+expect.extend(toHaveNoViolations);
 
 describe('RecipeForm', () => {
     const mockCreateRecipe = jest.fn();
@@ -72,5 +75,11 @@ describe('RecipeForm', () => {
 
             expect(nameInput).toHaveValue('Fail Recipe');
         });
+    });
+
+    it('should have no accessibility violations', async () => {
+        const { container } = renderComponent();
+        const results = await axe(container);
+        expect(results).toHaveNoViolations();
     });
 });

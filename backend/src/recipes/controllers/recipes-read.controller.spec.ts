@@ -30,8 +30,8 @@ describe('RecipesReadController', () => {
 
     describe('findAll', () => {
         it('should return an array of recipes', async () => {
-            expect(await controller.findAll({ page: 1, limit: 10 })).toEqual([]);
-            expect(mockRecipesService.findAll).toHaveBeenCalledWith(1, 10);
+            expect(await controller.findAll()).toEqual([]);
+            expect(mockRecipesService.findAll).toHaveBeenCalled();
         });
     });
 
