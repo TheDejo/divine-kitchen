@@ -67,4 +67,10 @@ Tests shouldn not just verify implementation details; they should verify *behavi
 ## 💡 Additional Comments
 I spent approximately **4 hours** on this exercise.
 
-(Any other comments or context you'd like to share)
+### Screenshots - Lighthouse and Axetools:
+<img width="1427" height="801" alt="Screenshot 2026-01-25 at 08 36 01" src="https://github.com/user-attachments/assets/24cd1e85-3c6c-4ede-aba1-776ba01c1507" />
+
+<img width="1426" height="799" alt="Screenshot 2026-01-25 at 08 35 28" src="https://github.com/user-attachments/assets/c75880c1-04ac-4f7a-b5f6-2704b6f42cba" />
+
+
+
