@@ -13,6 +13,14 @@ npm start
 
 Runs on http://localhost:3000
 
+### Configuration
+
+Create a `.env` file in the root of the frontend directory with the following variables:
+
+```env
+REACT_APP_ENV=development
+```
+
 ## Your Tasks
 
 1. Complete the three TODO functions in `src/App.tsx`:

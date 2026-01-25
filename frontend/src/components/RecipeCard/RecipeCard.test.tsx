@@ -77,8 +77,17 @@ describe('RecipeCard', () => {
     const stars = screen.getAllByText(/[⭐☆]/);
     userEvent.click(stars[4]);
 
-    expect(mockOnRatingChange).toHaveBeenCalledWith('1', 5);
+    expect(mockOnRatingChange).toHaveBeenCalledWith('1', 5, 4);
     expect(screen.queryByText('Delicious creamy pasta')).not.toBeInTheDocument();
+  });
+
+  it('should pass the current rating as prevRating when updating', () => {
+    renderComponent({ recipe: { ...mockRecipe, rating: 3 } });
+    const stars = screen.getAllByText(/[⭐☆]/);
+
+    userEvent.click(stars[4]);
+
+    expect(mockOnRatingChange).toHaveBeenCalledWith('1', 5, 3);
   });
 
   it('should have no accessibility violations', async () => {
